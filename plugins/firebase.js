@@ -14,6 +14,8 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config)
   firebase.firestore().settings({ timestampsInSnapshots: true })
 }
+
+/* ---------- export firebase product --------- */
 export const fireDb = firebase.firestore()
 export const auth = firebase.auth()
 export const googleProvider = new firebase.auth.GoogleAuthProvider()
