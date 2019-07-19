@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async writeToFirestore() {
-      const ref = fireDb.collection('test').doc('test')
+      const ref = fireDb.collection('test').doc('coucou')
       const document = {
         text: 'This is a test message.'
       }
