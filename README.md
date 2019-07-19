@@ -1,22 +1,18 @@
 # Nuxt-Firestore
 
-> My solid Nuxt.js project
+> Project NUXT.JS + FIREBASE
+
+Add Firestore and authentication for couple email and password. Just testing implémentation.
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-$ npm install
+# format esling --fix bug
+$ npm run precommit
 
 # serve with hot reload at localhost:3000
 $ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
