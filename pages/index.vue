@@ -1,20 +1,29 @@
 <template>
-  <section class="container">
-    <div>
-      <h2>
-        Write to Firestore.
-      </h2>
+  <div>
+    <section class="container">
       <div>
-        <button :disabled="writeSuccessful" @click="writeToFirestore">
-          <span v-if="!writeSuccessful">Write now</span>
-          <span v-else>Successful!</span>
-        </button>
+        <h1>Test enregistrement firestore</h1>
+        <h2>
+          Write to Firestore.
+        </h2>
+        <div>
+          <button :disabled="writeSuccessful" @click="writeToFirestore">
+            <span v-if="!writeSuccessful">Write now</span>
+            <span v-else>Successful!</span>
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section>
+      <h1>Enregistrement width Firebase</h1>
+      <button outline fab color="#4285F4" @click="googleSignIn">
+        Register
+      </button>
+    </section>
+  </div>
 </template>
 <script>
-import { fireDb } from '~/plugins/firebase.js'
+import { fireDb, auth } from '~/plugins/firebase.js'
 export default {
   data() {
     return {
@@ -34,6 +43,18 @@ export default {
         console.error(e)
       }
       this.writeSuccessful = true
+    },
+    googleSignIn() {
+      auth
+        .signInWithPopup(this.auth)
+        .then(result => {
+          // store the user ore wathever
+          this.$router.push('./')
+        })
+        .catch(e => {
+          this.$snotify.error(e.message)
+          console.log(e)
+        })
     }
   }
 }
