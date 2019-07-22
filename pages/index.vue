@@ -16,10 +16,12 @@
     </section>
     <section>
       <h1>Enregistrement width Firebase</h1>
-      <label for="email">Nom :</label>
-      <input id="email" :value="email" type="email" />
+      <label for="email">E-mail :</label>
+      <input id="email" v-model="email" type="email" />
+      {{ email }}
       <label for="password">Password : </label>
-      <input type="password" :value="password" />
+      <input v-model="password" type="password" />
+      {{ password }}
       <button outline fab color="#4285F4" @click="CreateUser">
         Create User
       </button>
@@ -33,7 +35,7 @@ export default {
     return {
       writeSuccessful: false,
       email: '',
-      pass: ''
+      password: ''
     }
   },
   methods: {
@@ -51,8 +53,10 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
+      console.log(this.email)
+      console.log(this.password)
       auth
-        .createUserWithEmailAndPassword(this.email, this.pass)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
           const errorCode = error.code
           console.log('errorCode: ', errorCode)
