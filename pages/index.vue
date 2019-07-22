@@ -26,6 +26,9 @@
         Create User
       </button>
     </section>
+    <section>
+      <h3 style="color: red;">{{ errorTest }}</h3>
+    </section>
   </div>
 </template>
 <script>
@@ -35,7 +38,8 @@ export default {
     return {
       writeSuccessful: false,
       email: '',
-      password: ''
+      password: '',
+      errorTest: ''
     }
   },
   methods: {
@@ -53,16 +57,12 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
-      console.log(this.email)
-      console.log(this.password)
-      auth
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function(error) {
-          const errorCode = error.code
-          console.log('errorCode: ', errorCode)
-          const errorMessage = error.message
-          console.log('errorMessage: ', errorMessage)
-        })
+      try {
+        auth.createUserWithEmailAndPassword(this.email, this.password)
+      } catch (error) {
+        this.errorTest = error.message
+        this.errorTest = 'Coucou la france'
+      }
     }
   }
 }
