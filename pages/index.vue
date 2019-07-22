@@ -16,8 +16,12 @@
     </section>
     <section>
       <h1>Enregistrement width Firebase</h1>
-      <button outline fab color="#4285F4" @click="googleSignIn">
-        Register
+      <label for="email">Nom :</label>
+      <input id="email" :value="email" type="email" />
+      <label for="password">Password : </label>
+      <input type="password" :value="password" />
+      <button outline fab color="#4285F4" @click="CreateUser">
+        Create User
       </button>
     </section>
   </div>
@@ -27,7 +31,9 @@ import { fireDb, auth } from '~/plugins/firebase.js'
 export default {
   data() {
     return {
-      writeSuccessful: false
+      writeSuccessful: false,
+      email: '',
+      pass: ''
     }
   },
   methods: {
@@ -44,16 +50,14 @@ export default {
       }
       this.writeSuccessful = true
     },
-    googleSignIn() {
+    CreateUser() {
       auth
-        .signInWithPopup(this.auth)
-        .then(result => {
-          // store the user ore wathever
-          this.$router.push('./')
-        })
-        .catch(e => {
-          this.$snotify.error(e.message)
-          console.log(e)
+        .createUserWithEmailAndPassword(this.email, this.pass)
+        .catch(function(error) {
+          const errorCode = error.code
+          console.log('errorCode: ', errorCode)
+          const errorMessage = error.message
+          console.log('errorMessage: ', errorMessage)
         })
     }
   }
