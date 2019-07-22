@@ -57,12 +57,10 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
-      let test = ''
+      const test = ''
       auth
         .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function() {
-          test = 'cpicpi'
-        })
+        .catch(err => console.log(err.message))
       console.log('valeur : ', test)
       this.errorTest = test
     }
