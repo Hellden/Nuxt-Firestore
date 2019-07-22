@@ -57,12 +57,9 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
-      const test = ''
       auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .catch(err => console.log(err.message))
-      console.log('valeur : ', test)
-      this.errorTest = test
     }
   }
 }
