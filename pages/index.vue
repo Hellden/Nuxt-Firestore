@@ -15,6 +15,9 @@
       </div>
     </section>
     <section>
+      <h3 style="color: red;">{{ errorTest }}</h3>
+    </section>
+    <section>
       <h1>Enregistrement width Firebase</h1>
       <label for="email">E-mail :</label>
       <input id="email" v-model="email" type="email" />
@@ -25,9 +28,6 @@
       <button outline fab color="#4285F4" @click="CreateUser">
         Create User
       </button>
-    </section>
-    <section>
-      <h3 style="color: red;">{{ errorTest }}</h3>
     </section>
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
     CreateUser() {
       auth
         .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(err => console.log(err.message))
+        .catch(err => (this.errorTest = err.message))
     }
   }
 }
