@@ -14,21 +14,31 @@
         </div>
       </div>
     </section>
+    <h1>Create User Firebase Password and EMAIL</h1>
+    <br />
     <section>
       <h3 style="color: red;">{{ errorTest }}</h3>
-    </section>
-    <section>
       <h1>Enregistrement width Firebase</h1>
       <label for="email">E-mail :</label>
       <input id="email" v-model="email" type="email" />
-      {{ email }}
       <label for="password">Password : </label>
       <input v-model="password" type="password" />
-      {{ password }}
       <button outline fab color="#4285F4" @click="CreateUser">
         Create User
       </button>
     </section>
+    <br />
+    <section>
+      <h1>Log in</h1>
+      <label for="email">E-mail :</label>
+      <input id="email" v-model="email" type="email" />
+      <label for="password">Password : </label>
+      <input v-model="password" type="password" />
+      <button outline fab color="#4285F4" @click="LogUser">
+        Connexion
+      </button>
+    </section>
+    <button @click="SendVerifEmail">Send email</button>
   </div>
 </template>
 <script>
@@ -39,7 +49,8 @@ export default {
       writeSuccessful: false,
       email: '',
       password: '',
-      errorTest: ''
+      errorTest: '',
+      userMail: ''
     }
   },
   methods: {
@@ -60,6 +71,33 @@ export default {
       auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .catch(err => (this.errorTest = err.message))
+    },
+    LogUser() {
+      auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .catch(err => (this.errorTest = err.message))
+
+      auth.onAuthStateChanged(function(user) {
+        if (user) {
+          console.log('je suis co')
+          console.log(user.email)
+        } else {
+          console.log('Je ne suis pas co')
+        }
+      })
+    },
+    SendVerifEmail() {
+      const user = auth.currentUser
+
+      auth.languageCode = 'fr'
+      user
+        .sendEmailVerification()
+        .then(function() {
+          console.log('Mail send')
+        })
+        .catch(function(error) {
+          console.log(error.message)
+        })
     }
   }
 }
