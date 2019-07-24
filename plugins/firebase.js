@@ -14,9 +14,14 @@ if (!firebase.apps.length) {
     messagingSenderId: '119242053211'
   }
   firebase.initializeApp(config)
-  firebase.firestore().settings({ timestampsInSnapshots: true })
 }
 
 /* ---------- export firebase product --------- */
 export const fireDb = firebase.firestore()
 export const auth = firebase.auth()
+
+export default {
+  read() {
+    return fireDb.collection('test').get()
+  }
+}

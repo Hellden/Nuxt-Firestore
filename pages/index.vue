@@ -39,10 +39,18 @@
       </button>
     </section>
     <button @click="SendVerifEmail">Send email</button>
+
+    <section>
+      <h1>List content Firestore</h1>
+      <ul>
+        <li v-for="item in Data" :key="item.index">{{ item.data().text }}</li>
+      </ul>
+    </section>
   </div>
 </template>
 <script>
-import { fireDb, auth } from '~/plugins/firebase.js'
+import db from '~/plugins/firebase.js'
+
 export default {
   data() {
     return {
@@ -50,12 +58,25 @@ export default {
       email: '',
       password: '',
       errorTest: '',
-      userMail: ''
+      userMail: '',
+      Data: []
     }
   },
+  created() {
+    this.readData()
+  },
   methods: {
+    readData() {
+      db.read()
+        .then(snapshot => {
+          this.Data = snapshot.docs
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    },
     async writeToFirestore() {
-      const ref = fireDb.collection('test').doc('coucou')
+      const ref = db.fireDb.collection('test').doc('coucou')
       const document = {
         text: 'This is a test message.'
       }
@@ -68,16 +89,16 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
-      auth
+      db.auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .catch(err => (this.errorTest = err.message))
     },
     LogUser() {
-      auth
+      db.auth
         .signInWithEmailAndPassword(this.email, this.password)
         .catch(err => (this.errorTest = err.message))
 
-      auth.onAuthStateChanged(function(user) {
+      db.auth.onAuthStateChanged(function(user) {
         if (user) {
           console.log('je suis co')
           console.log(user.email)
@@ -87,9 +108,9 @@ export default {
       })
     },
     SendVerifEmail() {
-      const user = auth.currentUser
+      const user = db.auth.currentUser
 
-      auth.languageCode = 'fr'
+      db.auth.languageCode = 'fr'
       user
         .sendEmailVerification()
         .then(function() {
