@@ -18,6 +18,8 @@ const firebasePlugin = {
 
 Vue.use(firebasePlugin)
 
+/* ------------------- Vuex ------------------- */
+
 export default ctx => {
   const { app, store } = ctx
 
