@@ -8,8 +8,7 @@ const firebaseConfig = {
   databaseURL: 'https://nuxt-project-raph.firebaseio.com',
   projectId: 'nuxt-project-raph',
   storageBucket: 'nuxt-project-raph.appspot.com',
-  messagingSenderId: '119242053211',
-  appId: '1:119242053211:web:e3c9f5c4677914c9'
+  messagingSenderId: '119242053211'
 }
 
 if (!firebase.apps.length) {

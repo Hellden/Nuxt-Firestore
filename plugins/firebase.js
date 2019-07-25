@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { db, auth } from '@/config/FirebaseInit'
+import { db, auth } from '@/config/firebaseInit'
 
 const firebasePlugin = {
   install() {

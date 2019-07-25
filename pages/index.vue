@@ -7,7 +7,11 @@
     <div>
       <h2>Listing Firestore</h2>
       <ul>
-        <li v-for="item in data" :key="item.index">{{ item.data().Nom }}</li>
+        <li v-for="item in data" :key="item.index">
+          {{ item.data().Nom }}<br />
+          {{ item.data().Age }}<br />
+          {{ item.data() }}
+        </li>
       </ul>
     </div>
   </div>
@@ -21,7 +25,18 @@ export default {
     }
   },
   created() {
-    this.$firestore.collection('Contact').get()
+    this.readFirestore()
+  },
+  methods: {
+    readFirestore() {
+      this.$firestore
+        .collection('Contact')
+        .get()
+        .then(snapshot => {
+          this.data = snapshot.docs
+        })
+        .catch(error => console.error(error.message))
+    }
   }
 }
 </script>
