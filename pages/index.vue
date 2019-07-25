@@ -85,7 +85,6 @@ export default {
       try {
         await ref.set(document)
       } catch (e) {
-        // TODO: error handling
         console.error(e)
       }
       this.writeSuccessful = true
