@@ -30,6 +30,7 @@
     <br />
     <section>
       <h1>Log in</h1>
+      <h2 v-if="emailConnect">L'utilisateur {{ emailConnect }} est connecté</h2>
       <label for="email">E-mail :</label>
       <input id="email" v-model="email" type="email" />
       <label for="password">Password : </label>
@@ -59,6 +60,7 @@ export default {
       password: '',
       errorTest: '',
       userMail: '',
+      emailConnect: '',
       Data: []
     }
   },
@@ -89,23 +91,12 @@ export default {
       this.writeSuccessful = true
     },
     CreateUser() {
-      db.auth
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(err => (this.errorTest = err.message))
+      db.createUser(this.email, this.password)
     },
     LogUser() {
-      db.auth
-        .signInWithEmailAndPassword(this.email, this.password)
-        .catch(err => (this.errorTest = err.message))
-
-      db.auth.onAuthStateChanged(function(user) {
-        if (user) {
-          console.log('je suis co')
-          console.log(user.email)
-        } else {
-          console.log('Je ne suis pas co')
-        }
-      })
+      db.logUser(this.email, this.password)
+      // eslint-disable-next-line no-unused-expressions
+      this.emailConnect = db.user().email
     },
     SendVerifEmail() {
       const user = db.auth.currentUser

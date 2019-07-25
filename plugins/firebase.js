@@ -18,10 +18,21 @@ if (!firebase.apps.length) {
 
 /* ---------- export firebase product --------- */
 export const fireDb = firebase.firestore()
-export const auth = firebase.auth()
 
 export default {
   read() {
     return fireDb.collection('test').get()
+  },
+  createUser(email, password) {
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
+  },
+  logUser(email, password) {
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(error => console.log(error.message))
+  },
+  user() {
+    return firebase.auth().currentUser
   }
 }
