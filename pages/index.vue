@@ -21,7 +21,8 @@
 export default {
   data() {
     return {
-      data: []
+      data: [],
+      userLog: ''
     }
   },
   created() {

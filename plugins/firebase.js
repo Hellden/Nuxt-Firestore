@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { db, auth } from '@/config/firebaseInit'
+import { db, auth, user } from '@/config/firebaseInit'
 
 const firebasePlugin = {
   install() {
@@ -10,7 +10,8 @@ const firebasePlugin = {
 
     if (!Vue.prototype.$db) {
       Vue.prototype.$firestore = db
-      Vue.prototype.$AUTH = auth
+      Vue.prototype.$auth = auth
+      Vue.prototype.$user = user
     }
   }
 }
@@ -23,11 +24,15 @@ export default ctx => {
   app.$firestore = Vue.prototype.$firestore
   ctx.$firestore = Vue.prototype.$firestore
 
-  app.$AUTH = Vue.prototype.$AUTH
-  ctx.$AUTH = Vue.prototype.$AUTH
+  app.$auth = Vue.prototype.$auth
+  ctx.$auth = Vue.prototype.$auth
+
+  app.$user = Vue.prototype.$user
+  ctx.$user = Vue.prototype.$user
 
   if (store) {
     store.$firestore = Vue.prototype.$firestore
-    store.$AUTH = Vue.prototype.$AUTH
+    store.$auth = Vue.prototype.$auth
+    store.$user = Vue.prototype.$user
   }
 }
