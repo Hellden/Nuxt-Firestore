@@ -32,6 +32,13 @@ export default {
   plugins: ['./plugins/firebase.js'],
 
   /*
+   ** Router settings
+   */
+  router: {
+    middleware: ['authenticated']
+  },
+
+  /*
    ** Nuxt.js modules
    */
   modules: ['@nuxtjs/bulma'],

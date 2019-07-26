@@ -14,11 +14,20 @@
         </li>
       </ul>
     </div>
+    <div class="container connexion">
+      <h2 class="subtitle">Validation de connexion</h2>
+      <Connexion />
+    </div>
   </div>
 </template>
 
 <script>
+import Connexion from '../components/Connexion.vue'
+
 export default {
+  components: {
+    Connexion
+  },
   data() {
     return {
       data: [],
@@ -43,7 +52,17 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+/* ------------------ HEADER ------------------ */
 .header__title{
   text-align :center
+}
+.header{
+  margin-bottom: 50px;
+}
+
+/* ----------------- Connexion ---------------- */
+.connexion{
+  margin-top: 50px;
 }
 </style>
