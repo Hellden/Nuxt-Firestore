@@ -1,68 +1,62 @@
 <template>
-  <div>
-    <div class="header">
-      <h1 class="header__title title">v2 DAL + Firestore + Authentificaiton</h1>
-    </div>
+  <div class="col-lg-6 mx-auto my-2">
+    <h1>Login to your account</h1>
+    <form @submit.prevent>
+      <div class="form-group">
+        <input
+          id="nuxtfire-email"
+          v-model="account.email"
+          type="email"
+          class="form-control"
+          placeholder="E-mail address"
+        />
+      </div>
 
-    <div class="container">
-      <h2 class="subtitle">Listing Firestore</h2>
-      <ul>
-        <li v-for="item in data" :key="item.index">
-          {{ item.data().Nom }}<br />
-          {{ item.data().Age }}<br />
-          {{ item.data() }}
-        </li>
-      </ul>
-    </div>
-    <div class="container connexion">
-      <h2 class="subtitle">Validation de connexion</h2>
-      <Connexion />
-    </div>
+      <div class="form-group">
+        <input
+          id="nuxtfire-password"
+          v-model="account.password"
+          type="password"
+          class="form-control"
+          placeholder="Password"
+        />
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" @click="login" />
+      </div>
+      <div v-if="isError" class="alert alert-danger">
+        <p class="mb-0">{{ errMsg }}</p>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
-import Connexion from '../components/Connexion.vue'
-
+import { setTimeout } from 'timers'
 export default {
-  components: {
-    Connexion
-  },
-  data() {
-    return {
-      data: [],
-      userLog: ''
-    }
-  },
-  created() {
-    this.readFirestore()
-  },
+  data: () => ({
+    account: {
+      email: '',
+      password: ''
+    },
+    isError: false,
+    errMsg: ''
+  }),
   methods: {
-    readFirestore() {
-      this.$firestore
-        .collection('Contact')
-        .get()
-        .then(snapshot => {
-          this.data = snapshot.docs
-        })
-        .catch(error => console.error(error.message))
+    login() {
+      // TODO: add parsing of data.
+      this.$store.dispatch('users/login', this.account).catch(error => {
+        this.isError = true
+        this.errMsg = error.code
+
+        setTimeout(() => {
+          this.isError = false
+        }, 5000)
+      })
+
+      this.$router.push('/admin')
     }
   }
 }
 </script>
-
-<style lang="css" scoped>
-
-/* ------------------ HEADER ------------------ */
-.header__title{
-  text-align :center
-}
-.header{
-  margin-bottom: 50px;
-}
-
-/* ----------------- Connexion ---------------- */
-.connexion{
-  margin-top: 50px;
-}
-</style>

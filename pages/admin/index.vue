@@ -1,11 +1,21 @@
 <template>
-  <div>
-    <h1 class="title is-spaced has-text-centered">Welcome page ADMIN</h1>
-  </div>
+  <section>
+    <h1>Admin route</h1>
+    <a @click="logout">Logout</a>
+  </section>
 </template>
 
 <script>
-export default {}
-</script>
+import Cookie from 'js-cookie'
 
-<style lang="scss" scoped></style>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.signOut()
+      await Cookie.remove('access_token')
+
+      location.href = '/'
+    }
+  }
+}
+</script>
