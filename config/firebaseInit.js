@@ -4,12 +4,12 @@ import 'firebase/firestore'
 
 if (!firebase.apps.length) {
   const firebaseConfig = {
-    apiKey: 'AIzaSyDD4IhWUUFWOQz69V_L9X100DpCCwk-Ml0',
-    authDomain: 'nuxt-project-raph.firebaseapp.com',
-    databaseURL: 'https://nuxt-project-raph.firebaseio.com',
-    projectId: 'nuxt-project-raph',
-    storageBucket: 'nuxt-project-raph.appspot.com',
-    messagingSenderId: '119242053211'
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGE_SENDER_ID
   }
   firebase.initializeApp(firebaseConfig)
 }
