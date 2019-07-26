@@ -46,6 +46,7 @@ export default {
   methods: {
     login() {
       // TODO: add parsing of data.
+      console.log('Process', process.env.API_KEY)
       this.$store.dispatch('users/login', this.account).catch(error => {
         this.isError = true
         this.errMsg = error.code
