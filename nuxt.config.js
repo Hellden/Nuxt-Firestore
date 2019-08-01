@@ -1,5 +1,4 @@
 import pkg from './package'
-require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -42,7 +41,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/bulma'],
+  modules: ['@nuxtjs/bulma', '@nuxtjs/dotenv'],
 
   /*
    ** Build configuration
