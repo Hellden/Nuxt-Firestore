@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-6 mx-auto my-2">
     <h1>Login to your account</h1>
-    <form>
+    <form @submit.prevent>
       <div class="form-group">
         <input
           id="nuxtfire-email"
