@@ -2,6 +2,7 @@
   <section>
     <h1>Admin route</h1>
     <a @click="logout">Logout</a>
+    <nuxt-link to="admin/profile">Profile</nuxt-link>
   </section>
 </template>
 

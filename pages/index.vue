@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-6 mx-auto my-2">
     <h1>Login to your account</h1>
-    <form @submit.prevent>
+    <form @submit.prevent="login">
       <div class="form-group">
         <input
           id="nuxtfire-email"
@@ -23,7 +23,7 @@
       </div>
 
       <div class="form-group">
-        <input type="submit" class="btn btn-primary" @click="login" />
+        <input type="submit" class="btn btn-primary" />
       </div>
       <div v-if="isError" class="alert alert-danger">
         <p class="mb-0">{{ errMsg }}</p>
